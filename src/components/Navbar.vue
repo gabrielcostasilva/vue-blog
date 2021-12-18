@@ -2,7 +2,6 @@
   <nav>
     <h1>Vuex Auth</h1>
     <template v-if="authIsReady">
-      
       <!-- for all users -->
       <div>
         <router-link to="/">Home</router-link>
@@ -23,23 +22,16 @@
   </nav>
 </template>
 
-<script>
+<script setup>
 import { computed } from '@vue/reactivity'
 import { useStore } from 'vuex'
 
-export default {
-  setup() {
-    const store = useStore()
+const store = useStore()
 
-    const handleLogout = () => {
-      store.dispatch('logout')
-    }
-
-    return {
-      handleLogout,
-      user: computed(() => store.state.user),
-      authIsReady: computed(() => store.state.authIsReady),
-    }
-  },
+const handleLogout = () => {
+  store.dispatch('logout')
 }
+
+const user = computed(() => store.state.user)
+const authIsReady = computed(() => store.state.authIsReady)
 </script>
