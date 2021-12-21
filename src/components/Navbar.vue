@@ -15,7 +15,7 @@
 
       <!-- for logged out users -->
       <div v-if="!user">
-        <router-link to="/login">Login</router-link>
+        <router-link to="/signin">Sign in</router-link>
         <router-link to="/signup">Signup</router-link>
       </div>
     </template>

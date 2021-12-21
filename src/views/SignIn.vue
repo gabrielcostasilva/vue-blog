@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="handleSubmit">
-    <h3>Login</h3>
+    <h3>Sign in</h3>
 
     <label for="email">Email:</label>
     <input type="email" name="email" v-model="email" required />
