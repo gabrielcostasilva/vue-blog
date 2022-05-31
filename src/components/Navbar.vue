@@ -24,14 +24,14 @@
 
 <script setup>
 import { computed } from '@vue/reactivity'
-import { useStore } from 'vuex'
+import { useStore } from '../store/index'
 
 const store = useStore()
 
 const handleLogout = () => {
-  store.dispatch('logout')
+  store.logout()
 }
 
-const user = computed(() => store.state.user)
-const authIsReady = computed(() => store.state.authIsReady)
+const user = computed(() => store.user)
+const authIsReady = computed(() => store.authIsReady)
 </script>

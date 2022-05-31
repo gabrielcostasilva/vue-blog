@@ -1,62 +1,51 @@
-import { createStore } from 'vuex'
+import { defineStore } from 'pinia'
 import { auth } from '../firebase/config'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged,
 } from 'firebase/auth'
 
-const store = createStore({
-  state: {
+export const useStore = defineStore('blogStore', {
+  state: () => ({
     user: null,
     authIsReady: false,
-  },
-  mutations: {
-    setUser(state, payload) {
-      state.user = payload
-      console.log('User state changed:', state.user)
-    },
-    setAuthIsReady(state, payload) {
-      state.authIsReady = payload
-    },
-  },
+  }),
   actions: {
-    async signup(context, { email, password }) {
+    setUser(payload) {
+      this.user = payload
+      console.log('User state changed:', this.user)
+    },
+    setAuthIsReady(payload) {
+      this.authIsReady = payload
+    },
+    async signup(email, password ) {
       console.log('signup action')
 
       const res = await createUserWithEmailAndPassword(auth, email, password)
 
       if (res) {
-        context.commit('setUser', res.user)
+        this.setUser(res.user)
       } else {
         throw new Error('Could not complete signup')
       }
     },
-    async login(context, { email, password }) {
+    async login(email, password ) {
       console.log('login action')
 
       const res = await signInWithEmailAndPassword(auth, email, password)
 
       if (res) {
-        context.commit('setUser', res.user)
+        this.setUser(res.user)
       } else {
         throw new Error('Could not complete login')
       }
     },
-    async logout(context) {
+    async logout() {
       console.log('Logout action')
 
       await signOut(auth)
-      context.commit('setUser', null)
+      this.setUser(null)
     },
   },
 })
-
-const unsub = onAuthStateChanged(auth, (user) => {
-  store.commit('setAuthIsReady', true)
-  store.commit('setUser', user)
-  unsub()
-})
-
-export default store

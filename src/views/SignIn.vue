@@ -15,7 +15,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '../store/index'
 import { useRouter } from 'vue-router'
 
 const email = ref('')
@@ -27,10 +27,7 @@ const router = useRouter()
 
 const handleSubmit = async () => {
   try {
-    await store.dispatch('login', {
-      email: email.value,
-      password: password.value,
-    })
+    await store.login(email.value, password.value)
 
     router.push('/')
   } catch (err) {

@@ -22,6 +22,21 @@
 <script setup>
 import { ref } from 'vue'
 
+import { useStore } from '../store/index'
+import { auth } from '../firebase/config'
+import {
+  onAuthStateChanged
+} from 'firebase/auth'
+
+const store = useStore()
+
+const unsub = onAuthStateChanged(auth, (user) => {
+  store.setAuthIsReady(true)
+  store.setUser(user)
+  unsub()
+})
+
+
 const blogs = ref([
   { title: 'Why Coffee is Better than Tea', id: 1 },
   { title: '...Then I Took an Arrow in the Knee', id: 2 },
