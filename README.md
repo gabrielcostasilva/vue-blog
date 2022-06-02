@@ -1,6 +1,6 @@
 # Vue Blog _With Pinia_
 
-We introduce [Pinia](https://pinia.vuejs.org) in this project as [Vuex](https://vuex.vuejs.org) is no longer the official option for state management.
+We introduce [Pinia](https://pinia.vuejs.org) in this project as [Vuex](https://vuex.vuejs.org) is no longer the official option for state management. Checkout [this project](https://github.com/gabrielcostasilva/vue-pinia-simple-example.git) for a quick intro to Pinia.
 
 ## Overview of Changes
 
